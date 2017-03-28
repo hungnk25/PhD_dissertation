@@ -1,0 +1,225 @@
+\documentclass[11pt,ECE_Dissertation_Style]{report}
+\usepackage{ECE_Dissertation_Style}
+\usepackage{epsfig}
+\usepackage{epsf}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{times}
+\usepackage{amsmath,amssymb,esint}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{mdwmath}
+\usepackage{pstricks}
+%\usepackage{rotating}
+%\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{nomencl}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage[lmargin=1.54 in, rmargin=0.94 in,tmargin=1.0 in,bmargin=1.05 in]{geometry}
+\usepackage{indentfirst}
+\usepackage[nottoc]{tocbibind}
+\hfuzz2pt
+\usepackage{caption}
+\captionsetup{format=hang}
+\usepackage{pdflscape}
+\usepackage{subcaption}
+\usepackage{appendix}
+\usepackage{mathrsfs}
+\usepackage{caption}
+\usepackage{bm}
+\usepackage{latexsym}
+\usepackage[utf8]{inputenc}
+\usepackage{afterpage}
+\usepackage{algpseudocode}
+
+
+\newcommand{\B}[1]{{\pmb{#1}}}
+
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}   
+    
+\makeatletter
+\renewcommand*\@makechapterhead[1]{%
+  %\vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \Large\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 7\p@
+    \fi
+    \interlinepenalty\@M
+    \LARGE \bfseries #1\par\nobreak
+    \vskip 10\p@
+  }}
+\renewcommand*\@makeschapterhead[1]{%
+  %\vspace*{50\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \LARGE \bfseries  #1\par\nobreak
+    \vskip 10\p@
+  }}
+\makeatother
+
+\numberwithin{algorithm}{chapter}
+\newcommand{\diag}{{\mathrm{diag}}}
+\newcommand{\rank}{{\mathrm{rank}}}
+\newlength{\absatz}           % verwendet in 'Notation'.
+\newlength{\einzug}           %      -"-
+\newlength{\boxwidth}         % verwendet fuer die Algorithmen.
+\newlength{\wid}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{beispiel}[theorem]{Example}
+\newtheorem{algorithmus}[theorem]{Algorithm}
+\newtheorem{bemerkung}[theorem]{Remark}
+\newtheorem{annahme}{Assumption}
+\setcounter{secnumdepth}{4}
+
+
+
+%\afterpage{\blankpage}
+
+
+\makenomenclature
+\begin{document}
+\thispagestyle{empty}
+        \null\vfill
+        \begin{center}
+                \Large\copyright\ Copyright by Hung Khanh Nguyen 2017\\
+                All Rights Reserved
+        \end{center}
+        \vfill\newpage
+
+\title{Big Data Optimization for Distributed Resource Management \\in Smart Grid}
+\author{Hung Khanh Nguyen}
+\submitdate{May 2017}
+\department{Electrical and Computer Engineering}
+
+\advisor{Dr. Zhu Han, Professor,\\Electrical and Computer Engineering}
+\firstreader{Dr.Kaushik Rajashekara, Professor,\\Electrical and Computer Engineering}
+\secondreader{Dr. Miao Pan, Assistant Professor,\\Electrical and Computer Engineering}
+\thirdreader{Dr.  Amin Khodaei , Associate Professor,\\Electrical and Computer Engineering\\University of Denver}
+\fourthreader{Dr.  Hamed Mohsenian-Rad, Associate Professor,\\Electrical Engineering\\University of California at Riverside}
+
+
+\makecoverpages
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\acknowledgements
+\setcounter{page}{5}
+\par I am so appreciative for everyone that has helped me during my Ph.D. study, which has made my short living in this beautiful country an unforgettable experience.
+
+\par First, I would like to express my great appreciation to my advisor, Professor Zhu Han, for his esteemed guidance, constant encouragement, and continuous support during my graduate studies. His deep academic background and keen insights have helped me achieve significant improvement in my Ph.D. research and to be well prepared for future professional development, which will be invaluable assets for my future career.
+
+\par Furthermore, I would like to express my sincere gratitude to Professor Miao Pan, who was my advisor during my master's degree in Texas Southern University. He has led me into the wireless communication research field and also helped me in getting such a precious opportunity to pursue a doctor's degree at the University of Houston. I would also like to thank the rest of my dissertation committee, Professor Walid Saad, Professor Saurabh Prasad and Professor Lijun Qian for their precious time and support on this dissertation.
+
+\par My appreciation also goes to my dear colleagues Huaqing Zhang, Yanru Zhang, Hung Ngyuen, Yong Xiao, Ali Arab, Lanchao Liu, Radwa Sultan, Sai Mounika Muthyala, and Xunsheng Du, whom I always had a great time with in both on and off work times. I am also grateful to my husband Jianing Wu, who is always by my side and sharing both my happiness and sadness. I am grateful to all my friends who gave me strong support during my Ph.D. life, in Houston, back in my hometown China, and all around the world. 
+
+\par Last but by no means least, I want to thank my mom, dad, grandmothers, grandfathers, aunts, uncles, cousins, and nephew for their infinite love, encouragement, patience, and support during all those years, and bringing us together as a wonderful family. 
+
+First of all, I would like to thank my advisor, Prof. Ju Bing Song for giving me opportunity
+to be a graduate student in his laboratory as well as his encouragement, inspiration, and
+continual support in many ways over the years. A special acknowledgement goes to Prof.
+Zhu Han at University of Houston for his invaluable advice, guidance at the necessary
+times.
+I would like to sincerely thank all my thesis examination committee members, Prof.
+Yun Hee Kim, Prof. Sung Won Lee, for reviewing my thesis and attending the thesis
+defense.
+I am thankful to my lab-mates in the Telecommunications Lab for discussions and
+support. I also express my thanks to all my colleagues and friends at Kyung Hee University
+for providing a pleasure working and living environment.
+
+\par Finally, I would like to thank my family for their permanent love and unconditional support throughout my life. Their moral support is the motivation to assist me in overcoming the dificulties of studying as well as living far away from my home country.
+
+
+
+\newpage
+\abstitlep
+\addcontentsline{toc}{chapter}{Abstract}
+\abstractsection
+
+% motivation: distributed resource management need big data
+
+%  mathematical models are crucial for uncovering properties of systems from measured data
+%  Learning graphical models is of fundamental importance in machine learning and statistics, and is often challenged by the fact that only a small number of samples are available
+
+%DER will make both operations and long-term planning more complex because it has a higher degree of output variability than traditional sources. To transform the grid, utilities need to implement new innovative solutions to match the requirements that large-scale adoption of DER will bring
+
+%Enhancing and modernizing the grid represents an opportunity to plan system upgrades strategically, minimize total cost and improve network flexibility
+ 
+%System operators will need increased awareness into real-time status of variable DER in order to make certain the distribution network remains balanced
+ 
+%This variability will make balancing the system (e.g., routine load flow analysis, scheduling and dispatching generation, maintaining voltage and frequency, determining appropriate levels of spinning reserve) more challenging, and utilities are likely to incur additional costs in their efforts to do so. This complexity will increase over time as greater numbers of DER installations become part of the system.
+  
+%Managing this integrated and complex system will require new architectural approaches to acquire readings, manage the data and provide operators with the right levels of situational awareness. It will involve implementing controls to manage the challenge of intermittency and variability that could have disastrous effects on grid operations, system security and reliability
+ 
+%Electric power grids are experiencing the increasing adoption of distributed energy resources, which makes energy management systems to be more and more complex due to the large-scale nature of optimization problems.
+
+Electric power grids are experiencing the increasing adoption of distributed energy resources, which makes both operations and long-term planning to be more and more complex due to the higher degree of output variability than traditional centralized sources. This variability creates irresistible challenges for grid operators to ensure system security and reliability. In addition, traditional optimization algorithms are no longer applicable for such integrated and complex systems. Therefore, an innovative optimization framework is critical to tackle the emerging challenges due to the large-scale and distributed nature of the future power system.
+
+In this dissertation, we focus on the application of big data optimization methods for distributed resource management problem in smart grid to improve the reliability and security of the distribution system. First, we propose an incentive mechanism design to motivate microgrids to participate in the peak ramp minimization problem for the system to mitigate the ramping effect due to the high penetration of distributed renewable generations. Distributed algorithms to achieve the optimal operation point are proposed, which allow microgrids to execute their computation in either synchronous fashion or asynchronous fashion. Second, a large-scale optimization problem for microgrids optimal scheduling and load curtailment problem is formulated. We propose a decomposition algorithm and implement parallel computation for the proposed algorithm to run on a computer cluster using the Hadoop MapReduce software framework. Third, a decentralized reactive power compensation model is studied to reduce the power losses and improve the voltage profile for distribution networks. Finally, we consider big data optimization methods for resource allocation problem in wireless network virtualization to prevent traffic disruption when physical network failures happen. 
+
+
+
+
+\newpage
+\makecontentspages
+
+\prefacesection
+
+
+ \chapter{Introduction}
+ \label{chap:Intro}
+ \input{Chap1/intro_v1.0}
+ 
+ \chapter{Incentive Mechanism Design for Integrated Microgrids in Peak Ramp Minimization}
+ \label{chap:PeakRamp}
+ \input{Chap2/peakramp_v1.0}
+ 
+ 
+ \chapter{A Big Data Scale Algorithm for Optimal Scheduling of Integrated Microgrids}
+ \label{chap:Bigdata}
+ \input{Chap3/bigdata_v1.0}
+ 
+ \chapter{Decentralized Reactive Power Compensation using Nash Bargaining Solution}
+ \label{chap:reactivepower}
+ \input{Chap4/reactivepower_v1.0}
+ 
+ \chapter{Parallel and Distributed Resource Allocation with Minimum Traffic Disruption for Network Virtualization}
+ \label{chap:NetworkVirtual}
+ \input{Chap5/NetVirt}
+ 
+ 
+ \chapter{Conclusions and Future Works}
+ \label{chap:Future}
+ \input{Chap6/future_v1.0}
+ 
+ 
+
+\lhead{\emph{References}}
+
+\renewcommand{\refname}{References}
+\renewcommand{\bibname}{References}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,SGRID}
+
+\afterpage{\blankpage}
+
+\end{document}
+
